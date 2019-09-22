@@ -24,9 +24,9 @@ const getBankDetails = (request,response) => {
 }
 
 const getBranchDetails = (request,response) => {
-  let bankName = request.params.bankName;
+  let bankName = request.query.bankName;
   bankName=bankName.toLowerCase();
-  let city = request.params.city;
+  let city = request.query.city;
   city=city.toLowerCase();
   let combinedObj = _.assign(defaultLimit,request.query);
   let limit = combinedObj.limit;
