@@ -20,12 +20,14 @@ const getBankDetails = (request,response) => {
 const getBranchDetails = (request,response) => {
   console.log(JSON.stringify(request.query));
   let bankName = request.query.bankName;
+  bankName=bankName.toLowerCase();
   let city = request.query.city;
+  city=city.toLowerCase();
   console.log("===============");
   console.log(bankName + ":::" + city);
   console.log("===============");
   if(bankName.length!=0 && city.length!=0) {
-    pool.query('SELECT * from bank_branches where LOWER(bank_name)=$1 and LOWER(city)=$2',[bankName,city], (error,results) => {
+    pool.query('SELECT * from bank_branches where lower(bank_name)=$1 and lower(city)=$2',[bankName,city], (error,results) => {
       if(error) throw error;
       response.status(200).json(results.rows);
     });
