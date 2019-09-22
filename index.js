@@ -18,16 +18,25 @@ const getBankDetails = (request,response) => {
 }
 
 const getBranchDetails = (request,response) => {
-  let bankName = request.params.ifsc;
-  let city = request.params.city;
-  pool.query('SELECT * from bank_branches where bank_name=$1 and city=$2',[bankName,city], (error,results) => {
-    if(error) throw error;
-    response.status(200).json(results.rows);
-  });
+  let bankName = request.query.ifsc.toLowerCase();
+  let city = request.query.city.toLowerCase();\
+  console.log("===============");
+  console.log(bankName + ":::" + city);
+  console.log("===============");
+  if(bankName.length!=0 && city.length!=0) {
+    pool.query('SELECT * from bank_branches where LOWER(bank_name)=$1 and LOWER(city)=$2',[bankName,city], (error,results) => {
+      if(error) throw error;
+      response.status(200).json(results.rows);
+    });
+  }
+  else{
+    throw new Error("Please provice Bank Name and city name");
+  }
+  
 }
 
 app.route('/bankDetails/:ifsc').get(getBankDetails);
-app.route('/branchDetails/:bankName/:city').get(getBranchDetails);
+app.route('/branchDetails').get(getBranchDetails);
 
 app.listen(process.env.PORT,() => {
   console.log('server started');
