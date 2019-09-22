@@ -10,9 +10,9 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(cors());
 
 const test = (request,response) => {
-  pool.query('SELECT name from banks where id=1', (error,result) => {
+  pool.query('SELECT name from banks where id=1', (error,results) => {
     if(error) throw error;
-    response.status(200).json({"status":JSON.stringify(result)});
+    response.status(200).json(results.rows);
   });
 }
 
