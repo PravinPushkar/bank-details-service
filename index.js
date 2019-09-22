@@ -18,8 +18,9 @@ const getBankDetails = (request,response) => {
 }
 
 const getBranchDetails = (request,response) => {
+  console.log(JSON.stringify(request.query));
   let bankName = request.query.ifsc.toLowerCase();
-  let city = request.query.city.toLowerCase();\
+  let city = request.query.city.toLowerCase();
   console.log("===============");
   console.log(bankName + ":::" + city);
   console.log("===============");
