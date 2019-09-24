@@ -30,17 +30,5 @@ router.get('/branchDetails', checkAccessToken, (request,response) => {
     response.status(200).json(results.rows);
   });
 });
-router.get('/getAllProducts', checkAccessToken, (request,response) => {
-  let products = [
-          {
-              id: 1,
-              name:"cheese"
-          },
-          {
-             id: 2,
-             name:"carottes"
-         }
-      ]
-      response.json(products)
-});
+
 module.exports = router;
