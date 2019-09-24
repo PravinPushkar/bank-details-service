@@ -3,7 +3,9 @@ const router = express.Router();
 const _ = require('lodash');
 const {pool} = require('./config');
 const {checkAccessToken} = require('./authMiddleware');
+const ApiController = require('./ApiController');
 
+const apiControllerInstance = new ApiController();
 const defaultLimit = {
   'limit':20
 };
@@ -12,10 +14,14 @@ router.get('/bankDetails/:ifsc',checkAccessToken, (request,response) => {
   let combinedObj = _.assign(defaultLimit,request.query);
   let limit = combinedObj.limit;
   let offset = _.isUndefined(combinedObj.offset)?0:combinedObj.offset;
-  pool.query('SELECT * from bank_branches where ifsc=$1 LIMIT $2 OFFSET $3',[ifscCode,limit,offset], (error,results) => {
+  apiControllerInstance.getBankDetails(ifscCode, limit, offset,(error,results) => {
     if(error) throw error;
     response.status(200).json(results.rows);
   });
+  // pool.query('SELECT * from bank_branches where ifsc=$1 LIMIT $2 OFFSET $3',[ifscCode,limit,offset], (error,results) => {
+  //   if(error) throw error;
+  //   response.status(200).json(results.rows);
+  // });
 });
 router.get('/branchDetails', checkAccessToken, (request,response) => {
   let bankName = request.query.bankName;
