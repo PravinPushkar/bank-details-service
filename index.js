@@ -14,6 +14,7 @@ app.use(cors());
 app.use('/api',routes);
 
 const doAuthentication = (request, response) => {
+  console.log(`from process ${process.pid}`);
   if(request.body.username==="service"){
       if(request.body.password==="service"){
       const payload = {
@@ -37,5 +38,5 @@ const doAuthentication = (request, response) => {
 app.route('/authenticate').post(doAuthentication);
 
 app.listen(process.env.PORT||3002,() => {
-  console.log('server started');
+  console.log(`server started, process pid ${process.pid}`);
 });

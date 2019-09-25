@@ -8,8 +8,10 @@ class ApiController {
       return cb(error, results);
     });
   }
-  getBranchDetails() {
-
+  getBranchDetails(bankName, city, limit, offset,cb) {
+    pool.query('SELECT * from bank_branches where LOWER(bank_name)=$1 and LOWER(city)=$2 LIMIT $3 OFFSET $4',[bankName,city,limit,offset], (error,results) => {
+      return cb(error, results);
+    });
   }
 }
 
