@@ -2,11 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-const secret = require('./secret.js');
 const app = express();
-const routes = require('./routes');
+const routes = require('./lib/routes');
 
-app.set('secret',secret.secret);
+app.set('secret',"bankdetailsservice");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
