@@ -1,3 +1,9 @@
+**GETTING ACCESS-TOKEN**
+
+```sh
+token=$(curl -X POST https://bank-details-service.herokuapp.com/authenticate -d "username=service&password=service" | jq -r '.token')
+```
+
 **FETCH BANK DETAILS API**
 
 ```sh
