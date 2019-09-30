@@ -7,7 +7,7 @@ token=$(curl -X POST https://bank-details-service.herokuapp.com/authenticate -d 
 **FETCH BANK DETAILS API**
 
 ```sh
-curl -G -H 'Content-Type: application/json' -H "access-token:$token" https://bank-details-service.herokuapp.com/api/bankDetails/ABHY0065006?"limit=0&offset=0" | jq -r
+curl -G -H 'Content-Type: application/json' -H "access-token:$token" https://bank-details-service.herokuapp.com/api/bankDetails/ABHY0065006?"limit=10&offset=0" | jq -r
 ```
 
 **FETCH BRANCH DETAILS API**
